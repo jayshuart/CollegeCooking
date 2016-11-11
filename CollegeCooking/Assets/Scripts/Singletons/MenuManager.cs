@@ -32,7 +32,7 @@ public class MenuManager : Singleton<MenuManager>
 
 	void Start()
 	{
-		GoToScreen("MainMenu");
+		//GoToScreen("MainMenu");
 	}
 
 	/// <summary>

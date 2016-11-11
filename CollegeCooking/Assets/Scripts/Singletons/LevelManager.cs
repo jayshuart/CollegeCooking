@@ -9,8 +9,8 @@ using System.Collections.Generic;
 public class LevelManager : Singleton<LevelManager>
 {
 	#region Fields
-	List<GameObject> levels = new List<GameObject>();
-    int level = 0;
+	public List<GameObject> levels = new List<GameObject>();
+    private int level = 0;
 	#endregion
 
 	#region Properties
