@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InputSettings : MonoBehaviour {
+public class InputSettings {
 
     #region Fields
     public float delay = 0.3f; //set delay for inputs
@@ -34,15 +34,6 @@ public class InputSettings : MonoBehaviour {
 
     #region Properties
     #endregion
-
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-
-    }
 
     /// <summary>
     /// gets player number and assigns input to their controller

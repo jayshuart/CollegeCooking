@@ -10,10 +10,12 @@ public class Player : MonoBehaviour
     #region Fields
     //input
     InputSettings input; //input manager for this player
-    int playerNum;
+    public int playerNum; //set from inspector
 
 	//Physics
 	private Rigidbody body;
+    public float moveSpeed;
+
 	#endregion
 
 	#region Properties
@@ -44,6 +46,10 @@ public class Player : MonoBehaviour
     {
         //update controller input
         input.UpdateInput();
+
+        //update players translation and rotation based on input
+        Move();
+        Rotate();
     }
 
     //METHODS=====================================================================================================
@@ -52,7 +58,11 @@ public class Player : MonoBehaviour
     /// </summary>
     void Move()
     {
-
+        //get lSticks input or both axis
+        if(Mathf.Abs(input.horizontalLStickIn) > input.delay || Mathf.Abs(input.verticalLStickIn) > input.delay)
+        {
+            transform.position += new Vector3(input.horizontalLStickIn * moveSpeed, 0, -input.verticalLStickIn * moveSpeed);
+        }
     }
 
     /// <summary>
@@ -60,7 +70,11 @@ public class Player : MonoBehaviour
     /// </summary>
     void Rotate()
     {
-
+        //get lSticks input or both axis
+        if (Mathf.Abs(input.horizontalRStickIn) > input.delay || Mathf.Abs(input.verticalRStickIn) > input.delay)
+        {
+            
+        }
     }
 
     /// <summary>
