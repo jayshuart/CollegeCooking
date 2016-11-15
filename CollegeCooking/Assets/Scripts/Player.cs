@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 	//Physics
 	private Rigidbody body;
     public float moveSpeed;
+    public float rotationSpeed;
 
 	#endregion
 
@@ -61,6 +62,8 @@ public class Player : MonoBehaviour
         //get lSticks input or both axis
         if(Mathf.Abs(input.horizontalLStickIn) > input.delay || Mathf.Abs(input.verticalLStickIn) > input.delay)
         {
+            //me @ me this si fine for now but use forces later
+            //update pos by the input
             transform.position += new Vector3(input.horizontalLStickIn * moveSpeed, 0, -input.verticalLStickIn * moveSpeed);
         }
     }
@@ -73,7 +76,30 @@ public class Player : MonoBehaviour
         //get lSticks input or both axis
         if (Mathf.Abs(input.horizontalRStickIn) > input.delay || Mathf.Abs(input.verticalRStickIn) > input.delay)
         {
-            
+            //up
+            if(input.horizontalRStickIn > 0)
+            {
+                transform.Rotate(Vector3.right * -rotationSpeed);
+            }
+
+            //down
+            if (input.horizontalRStickIn < 0)
+            {
+                transform.Rotate(Vector3.right * rotationSpeed);
+            }
+
+            //left
+            if (input.verticalRStickIn > 0)
+            {
+                transform.Rotate(Vector3.forward * -rotationSpeed);
+            }
+
+            //right
+            if (input.verticalRStickIn < 0)
+            {
+                transform.Rotate(Vector3.forward * rotationSpeed);
+            }
+
         }
     }
 
