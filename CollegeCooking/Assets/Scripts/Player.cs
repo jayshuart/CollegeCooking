@@ -14,8 +14,12 @@ public class Player : MonoBehaviour
 
 	//Physics
 	private Rigidbody body;
+
     public float moveSpeed;
+
     public float rotationSpeed;
+    public float rotationMin;
+    public float rotationMax;
 
 	#endregion
 
@@ -76,28 +80,44 @@ public class Player : MonoBehaviour
         //get lSticks input or both axis
         if (Mathf.Abs(input.horizontalRStickIn) > input.delay || Mathf.Abs(input.verticalRStickIn) > input.delay)
         {
-            //up
+            //backward
             if(input.horizontalRStickIn > 0)
             {
+                //rotate
                 transform.Rotate(Vector3.right * -rotationSpeed);
             }
 
-            //down
+            //forward
             if (input.horizontalRStickIn < 0)
             {
-                transform.Rotate(Vector3.right * rotationSpeed);
+                //check if we are at limit of rotation range
+                if (transform.localRotation.eulerAngles.x < rotationMax)
+                {
+                    //rotate
+                    //transform.Rotate(Vector3.right * rotationSpeed);
+                }
             }
 
             //left
             if (input.verticalRStickIn > 0)
             {
-                transform.Rotate(Vector3.forward * -rotationSpeed);
+                //check if we are at limit of rotation range
+                if (transform.rotation.y < rotationMax)
+                {
+                    //rotate
+                    //transform.Rotate(Vector3.forward * -rotationSpeed);
+                }
             }
 
             //right
             if (input.verticalRStickIn < 0)
             {
-                transform.Rotate(Vector3.forward * rotationSpeed);
+                //check if we are at limit of rotation range
+                if (transform.rotation.y > -rotationMax)
+                {
+                    //rotate
+                   // transform.Rotate(Vector3.forward * rotationSpeed);
+                }
             }
 
         }
