@@ -70,6 +70,7 @@ public class Player : MonoBehaviour
             //update pos by the input
             body.AddForce(new Vector3(-input.verticalLStickIn * moveSpeed, 0, -input.horizontalLStickIn * moveSpeed));
         }
+        body.AddForce(-body.velocity*2.0f);
     }
 
     /// <summary>
@@ -81,45 +82,48 @@ public class Player : MonoBehaviour
         if (Mathf.Abs(input.horizontalRStickIn) > input.delay || Mathf.Abs(input.verticalRStickIn) > input.delay)
         {
             //backward
-            if(input.horizontalRStickIn > 0)
+            if(input.lTriggerIn == 0 && input.horizontalRStickIn > 0)
             {
                 //rotate
-                transform.Rotate(Vector3.right * -rotationSpeed);
+                transform.Rotate(Vector3.forward * rotationSpeed,Space.World);
             }
-
+            
             //forward
-            if (input.horizontalRStickIn < 0)
+            if (input.lTriggerIn == 0 && input.horizontalRStickIn < 0)
             {
                 //check if we are at limit of rotation range
                 if (transform.localRotation.eulerAngles.x < rotationMax)
                 {
                     //rotate
-                    transform.Rotate(Vector3.right * rotationSpeed);
                 }
-            }
+                transform.Rotate(Vector3.forward * -rotationSpeed,Space.World);
 
+            }
+            
             //left
-            if (input.verticalRStickIn > 0)
+            if (input.verticalRStickIn < 0)
             {
                 //check if we are at limit of rotation range
                 if (transform.rotation.y < rotationMax)
                 {
                     //rotate
-                    transform.Rotate(Vector3.forward * -rotationSpeed);
                 }
-            }
+                transform.Rotate(Vector3.right * rotationSpeed,Space.World);
 
+            }
+            
             //right
-            if (input.verticalRStickIn < 0)
+            if (input.verticalRStickIn > 0)
             {
                 //check if we are at limit of rotation range
                 if (transform.rotation.y > -rotationMax)
                 {
                     //rotate
-                   transform.Rotate(Vector3.forward * rotationSpeed);
                 }
-            }
+                transform.Rotate(Vector3.right * -rotationSpeed,Space.World);
 
+            }
+            // */
         }
     }
 
