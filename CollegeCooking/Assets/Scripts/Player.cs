@@ -66,9 +66,9 @@ public class Player : MonoBehaviour
         //get lSticks input or both axis
         if(Mathf.Abs(input.horizontalLStickIn) > input.delay || Mathf.Abs(input.verticalLStickIn) > input.delay)
         {
-            //me @ me this si fine for now but use forces later
+
             //update pos by the input
-            transform.position += new Vector3(input.horizontalLStickIn * moveSpeed, 0, -input.verticalLStickIn * moveSpeed);
+            body.AddForce(new Vector3(-input.verticalLStickIn * moveSpeed, 0, -input.horizontalLStickIn * moveSpeed));
         }
     }
 
@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
                 if (transform.localRotation.eulerAngles.x < rotationMax)
                 {
                     //rotate
-                    //transform.Rotate(Vector3.right * rotationSpeed);
+                    transform.Rotate(Vector3.right * rotationSpeed);
                 }
             }
 
@@ -105,7 +105,7 @@ public class Player : MonoBehaviour
                 if (transform.rotation.y < rotationMax)
                 {
                     //rotate
-                    //transform.Rotate(Vector3.forward * -rotationSpeed);
+                    transform.Rotate(Vector3.forward * -rotationSpeed);
                 }
             }
 
@@ -116,7 +116,7 @@ public class Player : MonoBehaviour
                 if (transform.rotation.y > -rotationMax)
                 {
                     //rotate
-                   // transform.Rotate(Vector3.forward * rotationSpeed);
+                   transform.Rotate(Vector3.forward * rotationSpeed);
                 }
             }
 
