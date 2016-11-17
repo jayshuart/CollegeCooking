@@ -67,9 +67,22 @@ public class Player : MonoBehaviour
         if(Mathf.Abs(input.horizontalLStickIn) > input.delay || Mathf.Abs(input.verticalLStickIn) > input.delay)
         {
 
-            //update pos by the input
+            //update pos for the x/z plane by the input
             body.AddForce(new Vector3(-input.verticalLStickIn * moveSpeed, 0, -input.horizontalLStickIn * moveSpeed));
         }
+
+        //get rSticks input or both axis
+        if (Mathf.Abs(input.horizontalRStickIn) > input.delay)
+        {
+            //check if Ltrigger is being held down or not
+            if (input.lTriggerIn > 0)
+            {
+                //it is so we should use RStick to move on the y axis
+                body.AddForce(new Vector3(0, -input.horizontalRStickIn * moveSpeed, 0));
+            }
+        }
+
+        //add drag to stop us from constantly moving
         body.AddForce(-body.velocity*2.0f);
     }
 
