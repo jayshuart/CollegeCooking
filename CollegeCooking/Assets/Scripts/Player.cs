@@ -41,9 +41,14 @@ public class Player : MonoBehaviour
 	}
 
 	
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionStay(Collision collision)
     {
-
+        //check for right trigger and object being grabable
+        if(input.rTriggerIn > 0 && collision.gameObject.tag == "Grabable")
+        {
+            //bind 'grabbed' object to the hand
+            Debug.Log("touch me, touch me, say that you love me");
+        }
     }
 
 
