@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     //input
     InputSettings input; //input manager for this player
     public int playerNum; //set from inspector
+    private bool emptyHand; //is there something in our hand?
 
 	//Physics
 	private Rigidbody body;
@@ -20,7 +21,6 @@ public class Player : MonoBehaviour
     public float rotationSpeed;
     public float rotationMin;
     public float rotationMax;
-
 	#endregion
 
 	#region Properties
@@ -38,17 +38,21 @@ public class Player : MonoBehaviour
 
 		//Assign body
 		body = GetComponent<Rigidbody>();
+
+        //set default field values
+        emptyHand = true; //nothing grabbed, so nothing in our hand
 	}
 
 	
     void OnCollisionStay(Collision collision)
     {
-        //check for right trigger and object being grabable
-        if(input.rTriggerIn > 0 && collision.gameObject.tag == "Grabable")
+        //check for grab(r trigger) being pushed down
+        if(input.rTriggerIn > 0)
         {
-            //bind 'grabbed' object to the hand
-            Debug.Log("touch me, touch me, say that you love me");
+            //grab an object
+            Grab(collision.gameObject);
         }
+        
     }
 
 
@@ -60,9 +64,13 @@ public class Player : MonoBehaviour
         //update players translation and rotation based on input
         Move();
         Rotate();
+
+        //ungrab if R Trigger is let go
+        LetGo();
     }
 
     //METHODS=====================================================================================================
+    #region Methods
     /// <summary>
     /// moves hand based on controller input
     /// </summary>
@@ -79,8 +87,8 @@ public class Player : MonoBehaviour
         //get rSticks input or both axis
         if (Mathf.Abs(input.horizontalRStickIn) > input.delay)
         {
-            //check if Ltrigger is being held down or not
-            if (input.lTriggerIn > 0)
+            //check if Ltrigger is not being held down(shouldnt be)
+            if (input.lTriggerIn == 0)
             {
                 //it is so we should use RStick to move on the y axis
                 body.AddForce(new Vector3(0, -input.horizontalRStickIn * moveSpeed, 0));
@@ -96,62 +104,97 @@ public class Player : MonoBehaviour
     /// </summary>
     void Rotate()
     {
-        //get lSticks input or both axis
+        //get lSticks input or both axis and check if left rigger is being held down
         if (Mathf.Abs(input.horizontalRStickIn) > input.delay || Mathf.Abs(input.verticalRStickIn) > input.delay)
         {
             //backward
-            if(input.lTriggerIn == 0 && input.horizontalRStickIn > 0)
+            if(input.lTriggerIn > 0 && input.horizontalRStickIn > 0) //check for trigger being down and stick being moved
             {
-                //rotate
-                transform.Rotate(Vector3.forward * rotationSpeed,Space.World);
+                //rotate on forward axis in the world oientation
+                transform.Rotate(Vector3.forward * rotationSpeed, Space.World);
             }
             
             //forward
-            if (input.lTriggerIn == 0 && input.horizontalRStickIn < 0)
+            if (input.lTriggerIn > 0 && input.horizontalRStickIn < 0)
             {
                 //check if we are at limit of rotation range
                 if (transform.localRotation.eulerAngles.x < rotationMax)
                 {
                     //rotate
                 }
-                transform.Rotate(Vector3.forward * -rotationSpeed,Space.World);
+                transform.Rotate(Vector3.forward * -rotationSpeed, Space.World);
 
             }
             
             //left
-            if (input.verticalRStickIn < 0)
+            if (input.lTriggerIn > 0 && input.verticalRStickIn < 0)
             {
                 //check if we are at limit of rotation range
                 if (transform.rotation.y < rotationMax)
                 {
                     //rotate
                 }
-                transform.Rotate(Vector3.right * rotationSpeed,Space.World);
+                transform.Rotate(Vector3.right * rotationSpeed, Space.World);
 
             }
             
             //right
-            if (input.verticalRStickIn > 0)
+            if (input.lTriggerIn > 0 && input.verticalRStickIn > 0)
             {
                 //check if we are at limit of rotation range
                 if (transform.rotation.y > -rotationMax)
                 {
                     //rotate
                 }
-                transform.Rotate(Vector3.right * -rotationSpeed,Space.World);
+                transform.Rotate(Vector3.right * -rotationSpeed, Space.World);
 
             }
-            // */
         }
     }
 
     /// <summary>
     /// binds passed in obj to the position and roations of the hand thats grabbing it
     /// </summary>
-    /// <param name="obj"></param>
+    /// <param name="obj"> object to attempt a grab on</param>
     void Grab(GameObject obj)
     {
+        //check for object being grabable, and the hand being empty
+        if (obj.tag == "Grabable" && emptyHand)
+        {
+            //bind 'grabbed' object to the hand
+            obj.transform.parent = gameObject.transform; //set parent
+            Destroy(obj.GetComponent<Rigidbody>()); //get rid of the rigidbody so physics isnt weird
 
+            //update hand being full so we dont grab multiple objects
+            emptyHand = false;
+        }
     }
+
+    /// <summary>
+    /// let go of whatever object is being held
+    /// </summary>
+    void LetGo()
+    {
+       //check if R trigger has been let go and if there is something being grabbed
+       if(input.rTriggerIn == 0 && !emptyHand)
+        {
+            //get child of the hand
+            GameObject child = gameObject.transform.GetChild(0).gameObject;
+
+            //set its parent to not be the hand anymore
+            child.transform.parent = null;
+
+            //add a rigidbody back so itll have physics
+            child.AddComponent<Rigidbody>();
+
+            Rigidbody rb = child.GetComponent<Rigidbody>();
+            rb.useGravity = true;
+
+            //set hand to eb empty again
+            emptyHand = true;
+        }
+    }
+
+    #endregion
 }
 
