@@ -1,17 +1,17 @@
 fileFormatVersion: 2
-guid: 75a185945b83f424e95277fc6824c128
-timeCreated: 1479253752
+guid: 979275d122164fa46bb2e41b3cf93596
+timeCreated: 1480430821
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
-    100002: polySurface1_Lowpoly:polySurface1
+    100002: polySurface8_polySurface3_shoes:Mesh1
     400000: //RootNode
-    400002: polySurface1_Lowpoly:polySurface1
-    2300000: polySurface1_Lowpoly:polySurface1
-    3300000: polySurface1_Lowpoly:polySurface1
-    4300000: polySurface1_Lowpoly:polySurface1
+    400002: polySurface8_polySurface3_shoes:Mesh1
+    2300000: polySurface8_polySurface3_shoes:Mesh1
+    3300000: polySurface8_polySurface3_shoes:Mesh1
+    4300000: polySurface8_polySurface3_shoes:Mesh1
   materials:
     importMaterials: 1
     materialName: 0
