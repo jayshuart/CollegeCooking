@@ -4,37 +4,53 @@ using System.Collections;
 public class CuttableBlock : MonoBehaviour 
 {
 	#region Fields
-	private FixedJoint joint;
+	public int indexInObject;
+	public FoodType type;
+	private bool detached;
 	#endregion
 
-	void Start()
+	public void Detach()
 	{
-		joint = GetComponent<FixedJoint>();
-	}
-
-	void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.Space))
+		if (transform.parent != null && indexInObject > 0 && indexInObject < transform.parent.childCount - 1)
 		{
-			if (joint != default(FixedJoint))
+			int oldIndex = indexInObject;
+
+			//deparent all to the right
+			//set proper index
+			int x = 0;
+			for (int i = 0; i < transform.parent.childCount; i++)
 			{
-				Destroy(joint);
+				if (i < indexInObject)
+				{
+					transform.parent.GetChild(i).GetComponent<CuttableBlock>().indexInObject = i;
+				}
+				else
+				{
+					Debug.Log("Here and x is :" + x);
+					transform.parent.GetChild(i).GetComponent<CuttableBlock>().indexInObject = x;
+					x++;
+				}
 			}
+			//Now deparent
+			GameObject go = new GameObject();
+			Transform oldTransform = transform.parent.transform;
+			while (oldTransform.childCount > oldIndex)
+			{
+				oldTransform.GetChild(oldIndex).SetParent(go.transform);
+			}
+			go.AddComponent<BoxCollider>();
+			go.AddComponent<Rigidbody>();
+			go.AddComponent<CuttableObject>();
+			go.tag = "Grabable";
+			go.name = "New Cut";
+		}
+		else if (!detached)
+		{
+			//just deparent
+			transform.SetParent(null);
+			gameObject.AddComponent<Rigidbody>();
+			detached = true;
+			indexInObject = 0;
 		}
 	}
-
-	/*void OnCollisionEnter(Collision col)
-	{
-		if (col.collider.gameObject.tag == "Sharp")
-		{
-			if (leftJoint != default(FixedJoint))
-			{
-				Destroy(leftJoint);
-			}
-			else if (rightJoint != default(FixedJoint))
-			{
-				Destroy(rightJoint);
-			}
-		}
-	}*/
 }

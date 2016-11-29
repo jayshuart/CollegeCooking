@@ -2,6 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 
+//Add new foods to the bottom
+public enum FoodType
+{
+	Butter,
+	Cheese
+}
+
 /// <summary>
 /// Handles main play cycle logic. Anything within game manager should happen during gameplay
 /// and terminate when advancing to other menus.
