@@ -150,6 +150,20 @@ public class Player : MonoBehaviour
 
             }
         }
+
+        //check for Left Bumper use
+        if(input.lBumper)
+        {
+            //rotate hand around its y axis(not world) to the left
+            transform.Rotate(Vector3.up * -rotationSpeed);
+        }
+
+        //check for Right Bumper use
+        if (input.rBumper)
+        {
+            //rotate hand around its y axis(not world) to the right
+            transform.Rotate(Vector3.up * rotationSpeed);
+        }
     }
 
     /// <summary>
@@ -179,7 +193,7 @@ public class Player : MonoBehaviour
        if(input.rTriggerIn == 0 && !emptyHand)
         {
             //get child of the hand
-            GameObject child = gameObject.transform.GetChild(0).gameObject;
+            GameObject child = gameObject.transform.GetChild(1).gameObject;
 
             //set its parent to not be the hand anymore
             child.transform.parent = null;
