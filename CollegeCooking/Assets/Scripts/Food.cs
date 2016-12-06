@@ -2,6 +2,9 @@
 using System.Collections;
 using UnityEngine.Events;
 
+//Set cooking to true in order to cook
+//add listener for cook event, will fire once food is cooked
+//invoke break event outside class when colliding with other object to use
 public class Food : MonoBehaviour 
 {
 	#region Fields
