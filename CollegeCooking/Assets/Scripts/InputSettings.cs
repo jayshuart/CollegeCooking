@@ -102,7 +102,7 @@ public class InputSettings {
         rTriggerIn = Input.GetAxis(RTRIGGER_AXIS);
 
         //bumpers
-        lBumper = Input.GetButtonDown(LBUMPER);
-        rBumper = Input.GetButtonDown(RBUMPER);
+        lBumper = Input.GetButton(LBUMPER);
+        rBumper = Input.GetButton(RBUMPER);
     }
 }

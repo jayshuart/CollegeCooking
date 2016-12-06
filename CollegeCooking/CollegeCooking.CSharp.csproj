@@ -74,8 +74,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CuttableBlock.cs" />
-    <Compile Include="Assets\CuttableObject.cs" />
+    <Compile Include="Assets\Scripts\CuttableBlock.cs" />
+    <Compile Include="Assets\Scripts\CuttableObject.cs" />
     <Compile Include="Assets\Scripts\InputSettings.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Singletons\Base\MonoBehaviourExtended.cs" />

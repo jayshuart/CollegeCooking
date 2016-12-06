@@ -32,7 +32,7 @@ public class CuttableBlock : Food
 				}
 				else
 				{
-					Debug.Log("Here and x is :" + x);
+					//Debug.Log("Here and x is :" + x);
 					transform.parent.GetChild(i).GetComponent<CuttableBlock>().indexInObject = x;
 					x++;
 				}
