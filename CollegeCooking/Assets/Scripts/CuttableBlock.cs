@@ -1,13 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CuttableBlock : MonoBehaviour 
+public class CuttableBlock : Food
 {
 	#region Fields
 	public int indexInObject;
 	public FoodType type;
 	private bool detached;
 	#endregion
+
+	void Update()
+	{
+		//Cooking logic applies
+		base.Update();
+	}
 
 	public void Detach()
 	{

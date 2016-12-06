@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CuttableObject : MonoBehaviour 
+public class CuttableObject : Food
 {
 	#region Fields
 	//public and assigned
