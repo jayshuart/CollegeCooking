@@ -9,6 +9,14 @@ public class CuttableBlock : Food
 	private bool detached;
 	#endregion
 
+	void Start()
+	{
+		if (type == FoodType.Butter)
+		{
+			cookEvent.AddListener(DestroySelf);
+		}
+	}
+
 	void Update()
 	{
 		//Cooking logic applies
@@ -58,5 +66,10 @@ public class CuttableBlock : Food
 			detached = true;
 			indexInObject = 0;
 		}
+	}
+
+	void DestroySelf()
+	{
+		Destroy(gameObject);
 	}
 }

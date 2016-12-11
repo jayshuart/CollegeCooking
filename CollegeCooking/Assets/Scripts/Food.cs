@@ -14,8 +14,8 @@ public class Food : MonoBehaviour
 	public float breakForce;
 
 	//Events
-	protected UnityEvent cookEvent;
-	private UnityEvent breakEvent; //Might not use. 
+	public UnityEvent cookEvent = new UnityEvent();
+	private UnityEvent breakEvent = new UnityEvent(); //Might not use. 
 
 	//private
 	private bool cooking;
