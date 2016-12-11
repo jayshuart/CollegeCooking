@@ -19,6 +19,11 @@ public class GameManager : Singleton<GameManager>
     //Assigned in inspector
     public Player lefthand;
     public Player righthand;
+    public List<Sprite> taskSprites; //sprites of what tasks there are for the recipe
+    public GameObject currentTaskIcon;
+
+    //assigned in awake
+    private int currentTaskNum;
     #endregion
 
     #region Properties
@@ -28,10 +33,13 @@ public class GameManager : Singleton<GameManager>
 
     void Awake()
     {
+        //set intial task num
+        currentTaskNum = 0;
     }
 
     public void StartGame()
     {
+        //goto gamescreen off the bat
         MenuManager.Instance.GoToScreen("GameScreen");
     }
 
@@ -42,7 +50,23 @@ public class GameManager : Singleton<GameManager>
     {
     }
 
+    /// <summary>
+    /// goes to next task if we have completed the task act hand
+    /// </summary>
+    /// <param name="taskCompletedNum">index of the task that was done</param>
+    public void NextTask(int taskCompletedNum)
+    {
+        //check the index' for the task that was completed vs what we were on
+        if(currentTaskNum == taskCompletedNum)
+        {
+            //update current task index
+            currentTaskNum++;
 
+            //update spriterenderer on the current task icon
+            currentTaskIcon.GetComponent<SpriteRenderer>().sprite = taskSprites[currentTaskNum];
+        }
+        
+    }
 
     void Update()
     {

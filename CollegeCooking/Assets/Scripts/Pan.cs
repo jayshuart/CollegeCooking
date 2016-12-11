@@ -16,7 +16,10 @@ public class Pan : MonoBehaviour
 		if (buttersGot > buttersNeeded)
 		{
 			heated = true;
-			//Do something funky with color or whatev
+            //Do something funky with color or whatev
+
+            //update task icon - 1 for melting butter being done
+            GameManager.Instance.NextTask(1);
 
 		}
 	}
