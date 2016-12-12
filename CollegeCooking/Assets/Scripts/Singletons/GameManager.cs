@@ -6,7 +6,9 @@ using System.Collections.Generic;
 public enum FoodType
 {
 	Butter,
-	Cheese
+	Cheese,
+	Egg,
+	EggYolk
 }
 
 /// <summary>
