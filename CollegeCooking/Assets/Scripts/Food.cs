@@ -15,7 +15,7 @@ public class Food : MonoBehaviour
 
 	//Events
 	public UnityEvent cookEvent = new UnityEvent();
-	private UnityEvent breakEvent = new UnityEvent(); //Might not use. 
+	public UnityEvent breakEvent = new UnityEvent(); //Might not use. 
 
 	//private
 	private bool cooking;
@@ -28,7 +28,7 @@ public class Food : MonoBehaviour
 	public bool Cooked { get { return cooked; } }
 
 	//Events
-	public UnityEvent BreakEvent { get { return breakEvent; } }
+	//public UnityEvent BreakEvent { get { return breakEvent; } }
 	#endregion
 
 	protected void Update()
