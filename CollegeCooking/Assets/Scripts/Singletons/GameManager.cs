@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 //Add new foods to the bottom
+using UnityEngine.Events;
+
+
 public enum FoodType
 {
 	Butter,
@@ -26,6 +29,8 @@ public class GameManager : Singleton<GameManager>
 
     //assigned in awake
     private int currentTaskNum;
+
+	public UnityEvent winEvent = new UnityEvent();
     #endregion
 
     #region Properties
@@ -37,6 +42,8 @@ public class GameManager : Singleton<GameManager>
     {
         //set intial task num
         currentTaskNum = 0;
+
+		winEvent.AddListener(Win);
     }
 
     public void StartGame()
@@ -75,4 +82,10 @@ public class GameManager : Singleton<GameManager>
 
 
     }
+
+	void Win()
+	{
+		//trigger whatever
+		Debug.Log("Win");
+	}
 }

@@ -33,11 +33,23 @@ public class Pan : MonoBehaviour
 		}
 	}
 
+	void OnCollisionStay(Collision col)
+	{
+		if (col.gameObject.GetComponent<EggYolk>() && heated)
+		{
+			col.gameObject.GetComponent<EggYolk>().Cooking = true;
+		}
+	}
+
 	void OnCollisionExit(Collision col)
 	{
 		if (col.gameObject.GetComponent<CuttableBlock>() && col.gameObject.GetComponent<CuttableBlock>().type == FoodType.Butter)
 		{
 			col.gameObject.GetComponent<CuttableBlock>().Cooking = false;
+		}
+		if (col.gameObject.GetComponent<EggYolk>() && heated)
+		{
+			col.gameObject.GetComponent<EggYolk>().Cooking = false;
 		}
 	}
 }

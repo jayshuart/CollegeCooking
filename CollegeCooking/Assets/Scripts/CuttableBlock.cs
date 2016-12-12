@@ -71,5 +71,6 @@ public class CuttableBlock : Food
 	void DestroySelf()
 	{
 		Destroy(gameObject);
+		//Make a poof?
 	}
 }

@@ -4,16 +4,30 @@ using System.Collections;
 public class EggYolk : Food 
 {
 	#region Fields
-
+	public GameObject sunnySide;
 	#endregion
 
 	void Start()
 	{
-		cookEvent.AddListener(Cooked);
+		cookEvent.AddListener(EggCooked);
 	}
 
-	void Cooked()
+	void Update()
 	{
-		
+		base.Update();
+	}
+
+	void EggCooked()
+	{
+		//Change model
+		sunnySide.SetActive(true);
+	}
+
+	void OnCollisionEnter(Collision col)
+	{
+		if (col.gameObject.name == "plate" && Cooked)
+		{
+			GameManager.Instance.winEvent.Invoke();
+		}
 	}
 }
