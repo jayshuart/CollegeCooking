@@ -59,8 +59,13 @@ public class CuttableObject : Food
 		{
 			if (c.otherCollider.name == "Knife" && c.thisCollider.gameObject.GetComponent<CuttableBlock>() != null)
 			{
+                //detach pieces
 				c.thisCollider.gameObject.GetComponent<CuttableBlock>().Detach();
-			}
+
+                //check for task completion and updaet task if needed
+                GameManager.Instance.NextTask(0); //for for cutting butter
+
+            }
 		}
 	}
 }
