@@ -26,6 +26,8 @@ public class GameManager : Singleton<GameManager>
     public Player righthand;
     public List<Sprite> taskSprites; //sprites of what tasks there are for the recipe
     public GameObject currentTaskIcon;
+    public float startDelay;
+    public GameObject play;
 
     //assigned in awake
     public int currentTaskNum;
@@ -79,7 +81,15 @@ public class GameManager : Singleton<GameManager>
 
     void Update()
     {
+        //remove some time off the delay
+        startDelay -= Time.deltaTime;
 
+        //check if delay is below zero
+        if (startDelay < 0.0f)
+        {
+            //delay is over, get rid of play image
+            play.GetComponent<SpriteRenderer>().enabled = false;
+        }
 
     }
 
