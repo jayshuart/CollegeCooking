@@ -28,7 +28,7 @@ public class GameManager : Singleton<GameManager>
     public GameObject currentTaskIcon;
 
     //assigned in awake
-    private int currentTaskNum;
+    public int currentTaskNum;
 
 	public UnityEvent winEvent = new UnityEvent();
     #endregion
