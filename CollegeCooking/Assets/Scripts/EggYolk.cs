@@ -9,7 +9,6 @@ public class EggYolk : Food
 
 	void Awake()
 	{
-		GameManager.Instance.currentTaskNum = 3;
 		GameManager.Instance.NextTask(3);
 		cookEvent.AddListener(EggCooked);
 	}
@@ -24,7 +23,6 @@ public class EggYolk : Food
 		//Change model
 		sunnySide.SetActive(true);
 		GetComponent<MeshRenderer>().enabled = false;
-		GameManager.Instance.currentTaskNum = 4;
 		GameManager.Instance.NextTask(4);
 	}
 

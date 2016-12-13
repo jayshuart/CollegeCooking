@@ -30,7 +30,7 @@ public class GameManager : Singleton<GameManager>
     public GameObject play;
 
     //assigned in awake
-    public int currentTaskNum;
+    private int currentTaskNum;
 
 	public UnityEvent winEvent = new UnityEvent();
     #endregion
@@ -81,14 +81,16 @@ public class GameManager : Singleton<GameManager>
 
     void Update()
     {
-        //remove some time off the delay
-        startDelay -= Time.deltaTime;
-
         //check if delay is below zero
         if (startDelay < 0.0f)
         {
             //delay is over, get rid of play image
             play.GetComponent<SpriteRenderer>().enabled = false;
+        }
+        else
+        {
+            //remove some time off the delay
+            startDelay -= Time.deltaTime;
         }
 
     }

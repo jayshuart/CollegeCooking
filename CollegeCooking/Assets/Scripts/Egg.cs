@@ -49,7 +49,7 @@ public class Egg : Food {
         temp.transform.position = transform.position;
         temp.transform.SetParent(null);
 
-        Debug.Log("Spawn");
+        GameManager.Instance.NextTask(2);
         breakEvent.RemoveAllListeners();
         Destroy(gameObject);
     }
