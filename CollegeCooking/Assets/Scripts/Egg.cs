@@ -31,24 +31,28 @@ public class Egg : Food {
 
     void BreakEgg()
     {
-        GameObject temp = (GameObject)GameObject.Instantiate(eggBottom, transform.position, Quaternion.identity, gameObject.transform);
+        GameObject temp = (GameObject)GameObject.Instantiate(eggBottom, transform.position, Quaternion.identity);
+        temp.transform.SetParent(gameObject.transform);
         Vector3 tempLocalScale = temp.transform.localScale;
         temp.transform.localPosition = new Vector3(0f, 0f, (temp.transform.localScale.z) - (tempLocalScale.z / 2));
         temp.transform.position = transform.position;
         temp.transform.SetParent(null);
 
-        temp = (GameObject)GameObject.Instantiate(eggTop, transform.position, Quaternion.identity, gameObject.transform);
+        temp = (GameObject)GameObject.Instantiate(eggTop, transform.position, Quaternion.identity);
+        temp.transform.SetParent(gameObject.transform);
         tempLocalScale = temp.transform.localScale;
         temp.transform.localPosition = new Vector3(0f, 0f, (temp.transform.localScale.z) - (tempLocalScale.z / 2));
         temp.transform.position = transform.position;
         temp.transform.SetParent(null);
 
-        temp = (GameObject)GameObject.Instantiate(yolk, transform.position, Quaternion.identity, gameObject.transform);
+        temp = (GameObject)GameObject.Instantiate(yolk, transform.position, Quaternion.identity);
+        temp.transform.SetParent(gameObject.transform);
         tempLocalScale = temp.transform.localScale;
-        temp.transform.localPosition = new Vector3(0f, 0f, (temp.transform.localScale.z) - (tempLocalScale.z / 2));
+        temp.transform.localPosition = new Vector3(0f, 0f, 0f);// (temp.transform.localScale.z) - (tempLocalScale.z / 2));
         temp.transform.position = transform.position;
         temp.transform.SetParent(null);
 
+        GameManager.Instance.currentTaskNum = 2;
         GameManager.Instance.NextTask(2);
         breakEvent.RemoveAllListeners();
         Destroy(gameObject);

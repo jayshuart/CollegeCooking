@@ -28,7 +28,8 @@ public class CuttableObject : Food
 
 			for (int i = 0; i < numberOfPieces; i++)
 			{
-				GameObject temp = (GameObject)GameObject.Instantiate(blockPrefab, transform.position, Quaternion.identity, gameObject.transform);
+				GameObject temp = (GameObject)GameObject.Instantiate(blockPrefab, transform.position, Quaternion.identity);
+                temp.transform.SetParent(gameObject.transform);
 
 				//scale the go
 				Vector3 tempLocalScale = temp.transform.localScale;

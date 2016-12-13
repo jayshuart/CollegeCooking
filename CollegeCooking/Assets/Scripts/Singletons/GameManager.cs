@@ -30,7 +30,7 @@ public class GameManager : Singleton<GameManager>
     public GameObject play;
 
     //assigned in awake
-    private int currentTaskNum;
+    public int currentTaskNum;
 
 	public UnityEvent winEvent = new UnityEvent();
     #endregion
