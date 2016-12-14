@@ -9,9 +9,8 @@ public class EggYolk : Food
 
 	void Awake()
 	{
-		GameManager.Instance.NextTask(3);
-		cookEvent.AddListener(EggCooked);
-	}
+        cookEvent.AddListener(EggCooked);
+    }
 
 	void Update()
 	{
@@ -23,7 +22,7 @@ public class EggYolk : Food
 		//Change model
 		sunnySide.SetActive(true);
 		GetComponent<MeshRenderer>().enabled = false;
-        GameManager.Instance.currentTaskNum = 4;
+        //GameManager.Instance.currentTaskNum = 4;
 		GameManager.Instance.NextTask(4);
 	}
 
@@ -33,5 +32,10 @@ public class EggYolk : Food
 		{
 			GameManager.Instance.winEvent.Invoke();
 		}
+
+        if(col.gameObject.name == "pan")
+        {
+            GameManager.Instance.NextTask(3);
+        }
 	}
 }

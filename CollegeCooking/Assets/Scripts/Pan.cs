@@ -38,7 +38,7 @@ public class Pan : MonoBehaviour
 		if (col.gameObject.GetComponent<EggYolk>() && heated)
 		{
 			col.gameObject.GetComponent<EggYolk>().Cooking = true;
-		}
+        }
 	}
 
 	void OnCollisionExit(Collision col)

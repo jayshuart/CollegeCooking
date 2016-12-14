@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Egg : Food {
     public FoodType type;
-    public float breakForce=6;
+    //public float breakForce=6;
     public GameObject eggTop;
     public GameObject eggBottom;
     public GameObject yolk;
@@ -22,7 +22,6 @@ public class Egg : Food {
     
     void OnCollisionEnter(Collision col)
     {
-        Debug.Log(col.relativeVelocity.magnitude);
         if (col.relativeVelocity.magnitude >= breakForce)
         {
             breakEvent.Invoke();
@@ -31,6 +30,8 @@ public class Egg : Food {
 
     void BreakEgg()
     {
+        GameManager.Instance.NextTask(2);
+
         GameObject temp = (GameObject)GameObject.Instantiate(eggBottom, transform.position, Quaternion.identity);
         temp.transform.SetParent(gameObject.transform);
         Vector3 tempLocalScale = temp.transform.localScale;
@@ -52,8 +53,6 @@ public class Egg : Food {
         temp.transform.position = transform.position;
         temp.transform.SetParent(null);
 
-        GameManager.Instance.currentTaskNum = 2;
-        GameManager.Instance.NextTask(2);
         breakEvent.RemoveAllListeners();
         Destroy(gameObject);
     }
